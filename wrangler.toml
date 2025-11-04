@@ -1,0 +1,16 @@
+name = "insighthunter-app"
+compatibility_date = "2025-11-04"
+
+[[d1_databases]]
+binding = "INSIGHT_DB"
+database_name = "insight-db"
+database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+[[kv_namespaces]]
+binding = "INSIGHT_KV"
+id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+[[durable_objects]]
+binding = "INSIGHT_DO"
+class_name = "ReferralTracker"
+script_name = "insighthunter-app"
