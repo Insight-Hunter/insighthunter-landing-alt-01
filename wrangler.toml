@@ -1,6 +1,9 @@
 name = "insighthunter-landing"
 compatibility_date = "2025-11-04"
 
+[assets]
+directory = "./dist"
+
 [[d1_databases]]
 binding = "IHWEB_DB"
 database_name = "ihweb_db1"
