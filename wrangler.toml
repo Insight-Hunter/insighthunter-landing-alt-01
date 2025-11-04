@@ -22,7 +22,7 @@ id = "143442d1396e4257aa96d5a70eb3fcb3"
 binding = "QUIZ_SESSIONS"
 id = "f2c2b03e042948d39a9797899689d590"
 
-[[durable_objects]]
-binding = "IHREFERRAL_DO"
+[[durable_objects.bindings]]
+name = "IH_REFERRAL_DO"
 class_name = "ReferralTracker"
 script_name = "insighthunter-landing"
