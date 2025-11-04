@@ -1,16 +1,25 @@
-name = "insighthunter-app"
+name = "insighthunter-landing"
 compatibility_date = "2025-11-04"
 
 [[d1_databases]]
-binding = "INSIGHT_DB"
-database_name = "insight-db"
-database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+binding = "IHWEB_DB"
+database_name = "ihweb_db1"
+database_id = "7955b47c-f3c6-4ce4-b4d0-d44f9b425c7c"
 
 [[kv_namespaces]]
-binding = "INSIGHT_KV"
-id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+binding = "LEAD_TOKENS"
+id = "206065be6fec46369b6f44d91541e436"
+
+binding = "INSIGHTS"
+id = "60e34ba310ca40c79edec05470c7a271"
+
+binding = "PREVIEW_SEED"
+id = "143442d1396e4257aa96d5a70eb3fcb3"
+
+binding = "QUIZ_SESSIONS"
+id = "f2c2b03e042948d39a9797899689d590"
 
 [[durable_objects]]
 binding = "INSIGHT_DO"
 class_name = "ReferralTracker"
-script_name = "insighthunter-app"
+script_name = "insighthunter-landing"
