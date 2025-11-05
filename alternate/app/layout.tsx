@@ -1,0 +1,21 @@
+import type { Metadata } from "next";
+import { Inter, Montserrat } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading" });
+
+export const metadata: Metadata = {
+  title: "InsightHunter: AI Data Analysis Tool | Uncover Hidden Patterns Fast",
+  description: "Transform raw data into actionable insights with AI. Real-time analysis, precision targeting, and scalable reports. Start free.",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={`${inter.variable} ${montserrat.variable} font-body antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
