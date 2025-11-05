@@ -1,10 +1,15 @@
-const withPWA = require('next-pwa')({
+module.exports = withPWA({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   register: true,
   skipWaiting: true,
 });
+const { withNextOnPages } = require('@cloudflare/next-on-pages');
 
-module.exports = withPWA({
-  // Your existing config
-});
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+
+  output: 'export',  // For static export if no SSR
+};
+
+module.exports = withNextOnPages(nextConfig);
