@@ -1,15 +1,7 @@
 {
-  "name": "insighthunter-landing",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0",
-    "vite": "^7.1.12"
+    "build": "next build",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "dev": "next dev"
   }
 }

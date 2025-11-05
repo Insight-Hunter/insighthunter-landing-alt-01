@@ -1,37 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-        <div>
-          <h5 className="font-bold mb-4">Company</h5>
-          <ul className="space-y-2">
-            <li><a href="/about" className="hover:underline">About</a></li>
-            <li><a href="/careers" className="hover:underline">Careers</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Product</h5>
-          <ul className="space-y-2">
-            <li><a href="#features" className="hover:underline">Features</a></li>
-            <li><a href="/support" className="hover:underline">Support</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Legal</h5>
-          <ul className="space-y-2">
-            <li><a href="/privacy" className="hover:underline">Privacy</a></li>
-            <li><a href="/terms" className="hover:underline">Terms</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Connect</h5>
-          <ul className="space-y-2">
-            <li><a href="/affiliate" className="hover:underline">Affiliate Program</a></li>
-            <li><a href="#" className="hover:underline">Newsletter Signup</a></li>
-          </ul>
-        </div>
+    <footer className="bg-dark text-white py-12">
+      <div className="container mx-auto px-6 grid md:grid-cols-4 gap-8">
+        <div><h3 className="font-bold mb-4">InsightHunter</h3><p className="text-sm">AI-powered insights for modern teams.</p></div>
+        <div><h4 className="font-semibold mb-2">Product</h4><ul className="text-sm space-y-1"><li><a href="#">Features</a></li></ul></div>
+        <div><h4 className="font-semibold mb-2">Company</h4><ul className="text-sm space-y-1"><li><a href="#">About</a></li></ul></div>
+        <div><h4 className="font-semibold mb-2">Connect</h4><input placeholder="Email" className="w-full p-2 rounded mb-2" /><button className="bg-primary w-full py-2 rounded">Subscribe</button></div>
       </div>
-      <div className="text-center mt-10 text-sm text-gray-400">© 2025 InsightHunter, Inc.</div>
+      <div className="text-center text-sm mt-8">© 2025 InsightHunter. All rights reserved.</div>
+      <div className="text-center text-sm mt-8"> <a href="/legal.html">Privacy Policy</a><a href="/legal.html">  Terms of Service</a>
+      </div>
     </footer>
   );
 }
