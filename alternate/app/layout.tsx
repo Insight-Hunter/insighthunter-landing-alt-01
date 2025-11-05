@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
+import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#007BFF" />
+      </head>
+      <body className={`${inter.variable} ${montserrat.variable}`}>
+        {children}
+        <PWAInstallPrompt />  {/* ← HERE */}
+      </body>
+    </html>
+  );
+}
 const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading" });
 
