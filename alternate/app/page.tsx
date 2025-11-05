@@ -6,12 +6,14 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import BlogTeaser from "@/components/BlogTeaser";
 import Footer from "@/components/Footer";
+import NotificationPrompt from '@/components/NotificationPrompt';
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
+        <NotificationPrompt />
         <Hero />
         <Features />
         <HowItWorks />
