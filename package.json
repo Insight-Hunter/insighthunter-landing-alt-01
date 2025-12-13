@@ -1,7 +1,16 @@
 {
+  "name": "insighthunter-landing-alt-01",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "build": "next build",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "dev": "next dev"
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^5.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
