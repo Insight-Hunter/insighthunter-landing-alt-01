@@ -1,13 +1,12 @@
-c<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insight Hunter - Discover Hidden Insights</title>
     <style>
-        /* Design System Variables */
+        /* Design System Variables (unchanged) */
         :root {
-            /* Primitive Color Tokens */
             --color-white: rgba(255, 255, 255, 1);
             --color-black: rgba(0, 0, 0, 1);
             --color-cream-50: rgba(252, 252, 249, 1);
@@ -32,7 +31,6 @@ c<!DOCTYPE html>
             --color-orange-500: rgba(249, 115, 22, 1);
             --color-red-orange-600: rgba(220, 38, 38, 1);
 
-            /* RGB versions */
             --color-brown-600-rgb: 94, 82, 64;
             --color-teal-500-rgb: 33, 128, 141;
             --color-slate-900-rgb: 19, 52, 59;
@@ -43,7 +41,6 @@ c<!DOCTYPE html>
             --color-emerald-600-rgb: 4, 120, 87;
             --color-emerald-700-rgb: 6, 95, 70;
 
-            /* Semantic Tokens (Light Mode) */
             --color-background: var(--color-cream-50);
             --color-surface: var(--color-cream-100);
             --color-text: var(--color-slate-900);
@@ -58,7 +55,6 @@ c<!DOCTYPE html>
             --color-btn-primary-text: var(--color-cream-50);
             --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
 
-            /* Typography */
             --font-family-base: 'FKGroteskNeue', 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-size-base: 14px;
             --font-size-lg: 16px;
@@ -74,7 +70,6 @@ c<!DOCTYPE html>
             --line-height-tight: 1.2;
             --line-height-normal: 1.5;
 
-            /* Spacing */
             --space-8: 8px;
             --space-12: 12px;
             --space-16: 16px;
@@ -86,7 +81,6 @@ c<!DOCTYPE html>
             --space-64: 64px;
             --space-80: 80px;
 
-            /* Border Radius */
             --radius-sm: 6px;
             --radius-base: 8px;
             --radius-md: 10px;
@@ -94,26 +88,21 @@ c<!DOCTYPE html>
             --radius-xl: 16px;
             --radius-full: 9999px;
 
-            /* Shadows */
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
 
-            /* Animation */
             --duration-fast: 150ms;
             --duration-normal: 250ms;
             --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
 
-            /* Focus */
             --color-focus-ring: rgba(var(--color-emerald-500-rgb), 0.4);
             --focus-ring: 0 0 0 3px var(--color-focus-ring);
-            
-            /* Metallic */
+
             --gradient-metallic: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(0, 0, 0, 0.1) 100%);
             --shadow-metallic: 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
         }
 
-        /* Dark Mode */
         @media (prefers-color-scheme: dark) {
             :root {
                 --color-background: var(--color-charcoal-700);
@@ -133,802 +122,103 @@ c<!DOCTYPE html>
             }
         }
 
-        @font-face {
-            font-family: 'FKGroteskNeue';
-            src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
-        }
-
-        /* Base Styles */
-        * {
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-family-base);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: var(--font-size-base);
-            font-family: var(--font-family-base);
-            line-height: var(--line-height-normal);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            color: var(--color-text);
-            background-color: var(--color-background);
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--color-surface);
-            padding: var(--space-32) var(--space-20) var(--space-80);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -10%;
-            width: 40%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(var(--color-emerald-500-rgb), 0.08) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            right: -10%;
-            width: 50%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(var(--color-emerald-500-rgb), 0.05) 0%, transparent 70%);
-            animation: float 15s ease-in-out infinite reverse;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(5deg); }
-            66% { transform: translate(-20px, 20px) rotate(-5deg); }
-        }
-
-        /* Navigation */
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: var(--space-40);
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: var(--font-size-3xl);
-            font-weight: var(--font-weight-bold);
-            display: flex;
-            align-items: center;
-            gap: var(--space-12);
-            color: var(--color-text);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-            border-radius: var(--radius-base);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: var(--shadow-md), var(--shadow-metallic);
-            transition: transform var(--duration-normal) var(--ease-standard);
-            position: relative;
-        }
-        
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-base);
-            background: var(--gradient-metallic);
-            pointer-events: none;
-        }
-
-        .logo:hover .logo-icon {
-            transform: rotate(-10deg) scale(1.1);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-32);
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            transition: color var(--duration-normal) var(--ease-standard);
-            position: relative;
-            font-weight: var(--font-weight-medium);
-            font-size: var(--font-size-base);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--color-primary);
-            transition: width var(--duration-normal) var(--ease-standard);
-        }
-
-        .nav-links a:hover {
-            color: var(--color-primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--space-8);
-            color: var(--color-text);
-            font-size: 24px;
-        }
-
-        /* Hero Content */
-        .hero-content {
-            max-width: 800px;
-            margin: var(--space-64) auto 0;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        h1 {
-            font-size: var(--font-size-6xl);
-            font-weight: var(--font-weight-bold);
-            margin-bottom: var(--space-24);
-            line-height: var(--line-height-tight);
-            color: var(--color-text);
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--space-40);
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        /* CTA Buttons */
-        .cta-buttons {
-            display: flex;
-            gap: var(--space-16);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: var(--space-16) var(--space-32);
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-semibold);
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            transition: all var(--duration-normal) var(--ease-standard);
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-8);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s var(--ease-standard), height 0.6s var(--ease-standard);
-        }
-
-        .btn:active::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-            color: var(--color-accent);
-            box-shadow: var(--shadow-md), var(--shadow-metallic);
-            font-weight: var(--font-weight-bold);
-            position: relative;
-        }
-        
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-lg);
-            background: var(--gradient-metallic);
-            pointer-events: none;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-active) 100%);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg), 0 4px 20px rgba(var(--color-emerald-500-rgb), 0.4);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-primary:focus-visible {
-            outline: none;
-            box-shadow: var(--focus-ring);
-        }
-
-        .btn-secondary {
-            background: var(--color-secondary);
-            color: var(--color-primary);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-secondary-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary:focus-visible {
-            outline: none;
-            box-shadow: var(--focus-ring);
-        }
-
-        /* Features Section */
-        .features {
-            padding: var(--space-80) var(--space-20);
-            background: var(--color-background);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: var(--space-32) var(--space-16);
         }
 
         .section-title {
-            text-align: center;
-            font-size: var(--font-size-5xl);
+            font-size: var(--font-size-4xl);
             font-weight: var(--font-weight-bold);
-            margin-bottom: var(--space-64);
-            color: var(--color-text);
-            letter-spacing: -0.02em;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-32);
-        }
-
-        .feature-card {
-            background: var(--color-surface);
-            padding: var(--space-40);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--color-card-border);
-            box-shadow: var(--shadow-sm);
-            transition: all var(--duration-normal) var(--ease-standard);
-            position: relative;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--color-primary);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: var(--space-24);
-            box-shadow: var(--shadow-md), var(--shadow-metallic);
-            transition: transform var(--duration-normal) var(--ease-standard);
-            position: relative;
-        }
-        
-        .feature-icon::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-lg);
-            background: var(--gradient-metallic);
-            pointer-events: none;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .feature-card h3 {
-            font-size: var(--font-size-2xl);
-            margin-bottom: var(--space-12);
-            color: var(--color-text);
-            font-weight: var(--font-weight-semibold);
-        }
-
-        .feature-card p {
-            color: var(--color-text-secondary);
-            font-size: var(--font-size-base);
-            line-height: 1.6;
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            padding: var(--space-80) var(--space-20);
-            background: var(--color-surface);
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: var(--space-40);
-            margin-top: var(--space-64);
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-            padding: var(--space-32);
-            transition: transform var(--duration-normal) var(--ease-standard);
-        }
-
-        .step:hover {
-            transform: translateY(-4px);
-        }
-
-        .step-number {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-            color: var(--color-btn-primary-text);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-size-3xl);
-            font-weight: var(--font-weight-bold);
-            margin: 0 auto var(--space-24);
-            box-shadow: var(--shadow-md), var(--shadow-metallic);
-            transition: all var(--duration-normal) var(--ease-standard);
-            position: relative;
-        }
-        
-        .step-number::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-full);
-            background: var(--gradient-metallic);
-            pointer-events: none;
-        }
-
-        .step:hover .step-number {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .step h3 {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--space-12);
-            color: var(--color-text);
-            font-weight: var(--font-weight-semibold);
-        }
-
-        .step p {
-            color: var(--color-text-secondary);
-            font-size: var(--font-size-base);
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: var(--space-80) var(--space-20);
-            background: var(--color-surface);
-            text-align: center;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .cta-section h2 {
-            font-size: var(--font-size-5xl);
             margin-bottom: var(--space-24);
             color: var(--color-text);
-            font-weight: var(--font-weight-bold);
-            letter-spacing: -0.02em;
         }
 
-        .cta-section p {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--space-40);
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--color-background);
-            color: var(--color-text);
-            padding: var(--space-40) var(--space-20);
-            text-align: center;
-            border-top: 1px solid var(--color-border);
-        }
-
-        footer p {
-            color: var(--color-text-secondary);
-            font-size: var(--font-size-base);
-        }
-
-        .footer-links {
-            margin-top: var(--space-20);
+        .columns {
             display: flex;
-            gap: var(--space-32);
-            justify-content: center;
             flex-wrap: wrap;
+            gap: var(--space-24);
+            justify-content: space-between;
         }
 
-        .footer-links a {
-            color: var(--color-primary);
+        .price {
+            list-style-type: none;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--color-surface);
+            box-shadow: var(--shadow-md);
+            transition: var(--duration-normal) var(--ease-standard);
+        }
+
+        .price:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .price .header {
+            background-color: var(--color-teal-500);
+            color: var(--color-white);
+            font-size: var(--font-size-2xl);
+            padding: var(--space-24);
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            text-align: center;
+        }
+
+        .price li {
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-16);
+            text-align: center;
+        }
+
+        .price .grey {
+            background-color: var(--color-gray-200);
+            color: var(--color-text);
+            font-size: var(--font-size-lg);
+        }
+
+        .button {
+            background-color: var(--color-primary);
+            border: none;
+            color: var(--color-btn-primary-text);
+            padding: var(--space-12) var(--space-24);
+            border-radius: var(--radius-sm);
+            text-align: center;
             text-decoration: none;
-            transition: color var(--duration-normal) var(--ease-standard);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-medium);
+            display: block;
+            font-size: var(--font-size-lg);
+            margin: var(--space-16) auto;
+            width: fit-content;
         }
 
-        .footer-links a:hover {
-            color: var(--color-primary-hover);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                padding: var(--space-24) var(--space-16) var(--space-64);
-            }
-
-            nav {
-                padding-bottom: var(--space-24);
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .hero-content {
-                margin-top: var(--space-40);
-            }
-
-            h1 {
-                font-size: var(--font-size-4xl);
-            }
-
-            .hero p {
-                font-size: var(--font-size-lg);
-            }
-
-            .section-title {
-                font-size: var(--font-size-4xl);
-            }
-
-            .cta-section h2 {
-                font-size: var(--font-size-4xl);
-            }
-
-            .cta-section p {
-                font-size: var(--font-size-lg);
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-24);
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-                gap: var(--space-24);
-            }
-
-            .cta-buttons {
+        @media only screen and (max-width: 600px) {
+            .columns {
                 flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
             }
         }
-
-        /* iPhone Specific Optimizations */
-        @media (max-width: 430px) {
-            .hero {
-                padding: var(--space-20) var(--space-16) var(--space-48);
-            }
-
-            h1 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: var(--font-size-base);
-            }
-
-            .section-title {
-                font-size: 28px;
-                margin-bottom: var(--space-48);
-            }
-
-            .feature-card {
-                padding: var(--space-24);
-            }
-
-            .step {
-                padding: var(--space-20);
-            }
-
-            .cta-section h2 {
-                font-size: 28px;
-            }
-
-            .cta-section p {
-                font-size: var(--font-size-base);
-            }
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content,
-        .feature-card,
-        .step {
-            animation: fadeInUp 0.6s var(--ease-standard) backwards;
-        }
-
-        .feature-card:nth-child(1) { animation-delay: 0.1s; }
-        .feature-card:nth-child(2) { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) { animation-delay: 0.3s; }
-        .feature-card:nth-child(4) { animation-delay: 0.4s; }
-        .feature-card:nth-child(5) { animation-delay: 0.5s; }
-        .feature-card:nth-child(6) { animation-delay: 0.6s; }
-
-        .step:nth-child(1) { animation-delay: 0.1s; }
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.3s; }
-        .step:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <nav>
-            <div class="logo">
-                <div class="logo-icon">🔍</div>
-                <span>Insight Hunter</span>
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#get-started">Get Started</a>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Menu">☰</button>
-        </nav>
-
-        <div class="hero-content">
-            <h1>Uncover Hidden Insights<br>That Drive Growth</h1>
-            <p>Transform your data into actionable intelligence. Insight Hunter helps you discover patterns, trends, and opportunities hidden in your information.</p>
-            <div class="cta-buttons">
-                <a href="https://insighthunter.app" class="btn btn-primary">Start Hunting Now</a>
-                <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="features">
+    <header class="header">
         <div class="container">
-            <h2 class="section-title">Powerful Features for Deep Analysis</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast Analysis</h3>
-                    <p>Process thousands of data points in seconds. Get instant insights without the wait.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Precision Targeting</h3>
-                    <p>Advanced algorithms identify the most relevant insights for your specific needs and goals.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Beautiful Visualizations</h3>
-                    <p>Turn complex data into clear, stunning visualizations that tell compelling stories.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Enterprise Security</h3>
-                    <p>Bank-level encryption and security protocols keep your data safe and private.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Team Collaboration</h3>
-                    <p>Share insights, collaborate on findings, and make data-driven decisions together.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Continuous Learning</h3>
-                    <p>AI-powered platform that gets smarter over time, adapting to your unique patterns.</p>
-                </div>
-            </div>
+            <h1 class="title">Insight Hunter</h1>
+            <p class="subtitle">Discover Hidden Insights</p>
         </div>
-    </section>
-
-<section class="app-options">
-  <h2>Our App Options</h2>
-  <div class="columns">
-    <ul class="price">
-      <li class="header">Insight Lite</li>
-      <li class="grey">Free</li>
-      <li>Core financial dashboards</li>
-      <li>Basic cash flow & P&L insights</li>
-      <li>Single company support</li>
-      <li>Manual CSV upload</li>
-      <li class="grey"><a href="#" class="button">Get Started</a></li>
-    </ul>
-  </div>
-  <div class="columns">
-    <ul class="price">
-      <li class="header">Insight Hunter Standard</li>
-      <li class="grey">Advanced Analysis</li>
-      <li>Deeper forecasting & KPIs</li>
-      <li>Basic AI insights & alerts</li>
-      <li>Single company focus</li>
-      <li>Automated sync (coming soon)</li>
-      <li class="grey"><a href="#" class="button">Learn More</a></li>
-    </ul>
-  </div>
-  <div class="columns">
-    <ul class="price">
-      <li class="header">Insight Hunter AFP</li>
-      <li class="grey">Autonomous Financial Platform</li>
-      <li>All Standard features</li>
-      <li>Full AI-powered CFO engine</li>
-      <li>Multi-entity & group reporting</li>
-      <li>Automated workflows & actions</li>
-      <li class="grey"><a href="#" class="button">Contact Sales</a></li>
-    </ul>
-  </div>
-  <div class="columns">
-    <ul class="price">
-      <li class="header">BizForma</li>
-      <li class="grey">Free with In-App Upgrades</li>
-      <li>Smart forms & workflows</li>
-      <li>Powered by Insight Hunter analytics</li>
-      <li>Basic marketing & lead capture</li>
-      <li>Premium add-ons: advanced analytics, automation</li>
-      <li class="grey"><a href="#" class="button">Download Now</a></li>
-    </ul>
-  </div>
-</section>
-
-<style>
-* { box-sizing: border-box; }
-
-.columns {
-  float: left;
-  width: 23%;
-  padding: 8px;
-}
-
-.price {
-  list-style-type: none;
-  border: 1px solid #eee;
-  margin: 0;
-  padding: 0;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.price:hover {
-  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2);
-}
-
-.price .header {
-  background-color: #111;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-}
-
-.price li {
-  border-bottom: 1px solid #eee;
-  padding: 15px;
-  text-align: center;
-}
-
-.price .grey {
-  background-color: #eee;
-  color: black;
-  font-size: 18px;
-}
-
-.button {
-  background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-@media only screen and (max-width: 600px) {
-  .columns {
-    width: 100%;
-  }
-}
-</style>
+    </header>
 
     <section class="how-it-works" id="how-it-works">
-      w  <div class="container">
+        <div class="container">
             <h2 class="section-title">How It Works</h2>
             <div class="steps">
                 <div class="step">
@@ -955,11 +245,107 @@ c<!DOCTYPE html>
         </div>
     </section>
 
+<section class="product-offerings" id="pricing">
+    <div class="container">
+        <h2 class="section-title">Product Offerings & Pricing</h2>
+        <div class="columns">
+            <div class="price">
+                <ul>
+                    <li class="header">Insight Lite</li>
+                    <li class="grey">Free</li>
+                    <li>Core financial dashboards</li>
+                    <li>Basic cash flow & P&L insights</li>
+                    <li>Single company support</li>
+                    <li>Manual CSV upload</li>
+                    <li class="grey"><a href="#" class="button">Get Started</a></li>
+                </ul>
+            </div>
+            <div class="price">
+                <ul>
+                    <li class="header">Insight Hunter Standard</li>
+                    <li class="grey">$199/month</li>
+                    <li>Advanced analysis & forecasting</li>
+                    <li>Basic AI insights & alerts</li>
+                    <li>Single company focus</li>
+                    <li>Automated sync (coming soon)</li>
+                    <li class="grey"><a href="#" class="button">Learn More</a></li>
+                </ul>
+            </div>
+            <div class="price">
+                <ul>
+                    <li class="header">Insight Hunter AFP</li>
+                    <li class="grey">Contact Sales</li>
+                    <li>All Standard features</li>
+                    <li>Full AI-powered CFO engine</li>
+                    <li>Multi-entity & group reporting</li>
+                    <li>Automated workflows & actions</li>
+                    <li class="grey"><a href="#" class="button">Contact Sales</a></li>
+                </ul>
+            </div>
+            <div class="price">
+                <ul>
+                    <li class="header">BizForma</li>
+                    <li class="grey">Free + In-App Upgrades</li>
+                    <li>Smart forms & workflows</li>
+                    <li>Powered by Insight Hunter analytics</li>
+                    <li>Basic marketing & lead capture</li>
+                    <li>Premium add-ons: advanced analytics, automation</li>
+                    <li class="grey"><a href="#" class="button">Download Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="app-options">
+        <div class="container">
+            <h2 class="section-title">Our App Options</h2>
+            <div class="columns">
+                <ul class="price">
+                    <li class="header">Insight Lite</li>
+                    <li class="grey">Free</li>
+                    <li>Core financial dashboards</li>
+                    <li>Basic cash flow & P&L insights</li>
+                    <li>Single company support</li>
+                    <li>Manual CSV upload</li>
+                    <li class="grey"><a href="#" class="button">Get Started</a></li>
+                </ul>
+                <ul class="price">
+                    <li class="header">Insight Hunter Standard</li>
+                    <li class="grey">Advanced Analysis</li>
+                    <li>Deeper forecasting & KPIs</li>
+                    <li>Basic AI insights & alerts</li>
+                    <li>Single company focus</li>
+                    <li>Automated sync (coming soon)</li>
+                    <li class="grey"><a href="#" class="button">Learn More</a></li>
+                </ul>
+                <ul class="price">
+                    <li class="header">Insight Hunter AFP</li>
+                    <li class="grey">Autonomous Financial Platform</li>
+                    <li>All Standard features</li>
+                    <li>Full AI-powered CFO engine</li>
+                    <li>Multi-entity & group reporting</li>
+                    <li>Automated workflows & actions</li>
+                    <li class="grey"><a href="#" class="button">Contact Sales</a></li>
+                </ul>
+                <ul class="price">
+                    <li class="header">BizForma</li>
+                    <li class="grey">Free with In-App Upgrades</li>
+                    <li>Smart forms & workflows</li>
+                    <li>Powered by Insight Hunter analytics</li>
+                    <li>Basic marketing & lead capture</li>
+                    <li>Premium add-ons: advanced analytics, automation</li>
+                    <li class="grey"><a href="#" class="button">Download Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-section" id="get-started">
         <div class="container">
             <h2>Ready to Discover Your Next Big Insight?</h2>
             <p>Join thousands of teams already using Insight Hunter to make smarter decisions</p>
-            <a href="https://insighthunter.app" class="btn btn-primary">Get Started Free</a>
+            <a href="https://insighthunter.app" class="button">Get Started Free</a>
         </div>
     </section>
 
@@ -974,8 +360,3 @@ c<!DOCTYPE html>
     </footer>
 </body>
 </html>
-
-
- 
- 
-    
