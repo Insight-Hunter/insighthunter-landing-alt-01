@@ -1,6 +1,28 @@
 import React from "react"
 import { Link } from "gatsby"
 import "../styles/global.css"
+import "../styles/glass.css"
+
+
+<div class="glass-card">
+  <h1>InsightHunter Reports</h1>
+  <button id="load">Load Reports</button>
+  <ul id="list"></ul>
+</div>
+
+<script>
+document.getElementById("load").onclick = async () => {
+  const res = await fetch("/api/reports", {
+    headers: {
+      Authorization: "Bearer YOUR_JWT"
+    }
+  })
+  const data = await res.json()
+
+  document.getElementById("list").innerHTML =
+    data.map(r => `<li>${r.title}</li>`).join("")
+}
+</script>
 
 const IndexPage = () => {
   return (
