@@ -1,0 +1,19 @@
+:root {
+  /* Core palette */
+  --purple: 260 90% 60%;
+  --cyan: 190 90% 55%;
+  --blue: 220 90% 60%;
+  --gray: 220 15% 18%;
+
+  /* Glass */
+  --glass-bg: hsla(0, 0%, 100%, 0.08);
+  --glass-border: hsla(0, 0%, 100%, 0.18);
+  --glass-blur: 18px;
+
+  /* Glow */
+  --glow-purple: 0 0 40px hsla(var(--purple), 0.35);
+  --glow-cyan: 0 0 40px hsla(var(--cyan), 0.35);
+
+  /* Radius */
+  --radius-lg: 18px;
+}
