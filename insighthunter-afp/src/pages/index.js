@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import "../styles/global.css"
 
 const IndexPage = () => {
@@ -11,8 +12,7 @@ const IndexPage = () => {
             <span>INSIGHT</span>
             <span>HUNTER</span>
           </div>
-          <button className="ih-avatar">
-            {/* simple user icon */}
+          <button className="ih-avatar" aria-label="User profile">
             <span className="text-sm">👤</span>
           </button>
         </div>
@@ -27,43 +27,58 @@ const IndexPage = () => {
           </p>
         </section>
 
+        {/* Primary action */}
+        <div className="actions">
+          <Link to="/wizard" className="ih-action-btn">
+            Start Wizard
+          </Link>
+        </div>
+
         {/* Primary tiles */}
         <section className="ih-primary-tiles">
-          <button className="ih-tile">
+          <Link to="/wizard" className="ih-tile">
             <div className="ih-tile-icon">✏️</div>
-            <div className="ih-tile-label">Start Wizard</div>
-          </button>
-          <button className="ih-tile">
+            <span>Start Wizard</span>
+          </Link>
+
+          <Link to="/reports" className="ih-tile">
             <div className="ih-tile-icon">📄</div>
-            <div className="ih-tile-label">View Reports</div>
-          </button>
-          <button className="ih-tile">
+            <span>View Reports</span>
+          </Link>
+
+          <Link to="/preview" className="ih-tile">
             <div className="ih-tile-icon">〰️</div>
-            <div className="ih-tile-label">Simulation Preview</div>
-          </button>
+            <span>Simulation Preview</span>
+          </Link>
         </section>
 
         {/* Lower cards */}
         <section className="ih-lower">
           <div className="ih-card">
             <h2 className="ih-card-title">Company Snapshot</h2>
+
             <div className="ih-card-row">
               <span>Role</span>
               <span className="ih-card-emph">Treasurer</span>
             </div>
+
             <div className="ih-card-row">
               <span>Domain</span>
               <span className="ih-card-emph">Liquidity</span>
             </div>
+
             <div className="ih-card-row">
               <span>Risk tolerance</span>
               <span className="ih-card-emph">Moderate</span>
             </div>
+
             <div className="ih-card-row">
               <span>Last report</span>
               <span className="ih-card-emph flex items-center gap-1">
                 Dec 12
-                <button className="ih-download-link">Download</button>
+                <Link to="/reports/dec-12.pdf" className="ih-download-link">
+                  Download
+                </Link>
               </span>
             </div>
           </div>
@@ -87,11 +102,11 @@ const IndexPage = () => {
           </div>
         </section>
 
-        {/* Footer links */}
+        {/* Footer */}
         <nav className="ih-footer-nav">
-          <a>Docs</a>
-          <a>Support</a>
-          <a>Admin</a>
+          <Link to="/docs">Docs</Link>
+          <Link to="/support">Support</Link>
+          <Link to="/admin">Admin</Link>
         </nav>
       </main>
     </div>

@@ -2,8 +2,11 @@ import React from "react"
 import { Link } from "gatsby"
 import "../styles/global.css"
 
+import Layout from "../components/Layout"
+
 const PricingPage = () => {
   return (
+    <Layout>
     <div className="min-h-screen bg-cream-50">
       <div className="container py-20">
         <h1 className="section-title text-center">Pricing & Plans</h1>
@@ -82,6 +85,7 @@ const PricingPage = () => {
         </div>
       </div>
     </div>
+   </Layout>
   )
 }
 
