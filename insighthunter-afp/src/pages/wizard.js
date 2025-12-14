@@ -1,5 +1,6 @@
 .import * as React from "react"
 import Layout from "../components/Layout"
+impott "../styles/global.scss
 
 export default function WizardPage() {
   const [step, setStep] = React.useState(1)
