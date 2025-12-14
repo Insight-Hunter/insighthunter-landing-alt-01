@@ -13,7 +13,19 @@ export default {
       return new Response(JSON.stringify({ success: true, id: key }), {
         headers: { "Content-Type": "application/json" }
       })
-    }
+    }if (request.method === "POST" && url.pathname === "/quiz") {
+  const data = await request.json()
+  const key = `quiz-${Date.now()}.json`
+
+  await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
+    httpMetadata: { contentType: "application/json" }
+  })
+
+  return new Response(JSON.stringify({ success: true, id: key }), {
+    headers: { "Content-Type": "application/json" }
+  })
+}
+
 
 export default {
   async fetch(request, env) {
