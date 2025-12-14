@@ -1,15 +1,20 @@
 import * as React from "react"
+import Layout from "../components/Layout"
+import reports from "../data/reports.json"
 
 export default function ReportsPage() {
   return (
     <Layout>
-    <main style={{ padding: "2rem", color: "#00ffff", background: "#0b0f1a" }}>
       <h1>Reports</h1>
-      <p>List of generated reports will appear here.</p>
+      <p>Browse generated reports below:</p>
       <ul>
-        <li><a href="/reports/dec-12.pdf">Download Dec 12 Report</a></li>
+        {reports.map(report => (
+          <li key={report.id}>
+            <strong>{report.title}</strong> ({report.date}) —
+            <a href={report.file} download>Download</a>
+          </li>
+        ))}
       </ul>
-    </main>
-  </Layout>
+    </Layout>
   )
 }
