@@ -1,12 +1,46 @@
-import * as React from "react"
+.import * as React from "react"
 import Layout from "../components/Layout"
 
 export default function WizardPage() {
   const [step, setStep] = React.useState(1)
   const [formData, setFormData] = React.useState({})
 
-  const next = () => setStep(step + 1)
-  const back = () => setStep(step - 1)
+  const next = () => {
+    if (step < 7) {
+      setStep(step + 1)
+    }
+  }
+
+  const back = () => {
+    if (step > 1) {
+      setStep(step - 1)
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const payload = {
+      role: formData.role,
+      domain: formData.domain,
+      riskTolerance: formData.riskTolerance,
+      answers: {
+        q1: e.target.q1.value,
+        q2: e.target.q2.value,
+        q3: e.target.q3.value
+      }
+    }
+    try {
+      await fetch("https://your-worker-url.workers.dev/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      next()
+    } catch (error) {
+      // Handle error, show user feedback if needed
+      console.error("Failed to submit quiz:", error)
+    }
+  }
 
   return (
     <Layout>
@@ -28,7 +62,17 @@ export default function WizardPage() {
           </>
         )}
 
-        {/* Repeat for domain, risk tolerance, quiz, etc. */}
+        {step === 5 && (
+          <>
+            <h1>Quiz</h1>
+            <form onSubmit={handleSubmit}>
+              <label>Liquidity ratio: <input name="q1" /></label><br/>
+              <label>Forecast horizon: <input name="q2" /></label><br/>
+              <label>Reporting style: <input name="q3" /></label><br/>
+              <button type="submit">Submit Quiz →</button>
+            </form>
+          </>
+        )}
 
         {step === 6 && (
           <>
@@ -51,3 +95,4 @@ export default function WizardPage() {
     </Layout>
   )
 }
+
