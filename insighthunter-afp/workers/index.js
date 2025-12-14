@@ -1,5 +1,40 @@
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url)
+
+    if (request.method === "POST" && url.pathname === "/quiz") {
+      const data = await request.json()
+      const key = `quiz-${Date.now()}.json`
+
+      await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
+        httpMetadata: { contentType: "application/json" }
+      })
+
+      return new Response(JSON.stringify({ success: true, id: key }), {
+        headers: { "Content-Type": "application/json" }
+      })
+    }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url)
+
+    if (request.method === "POST" && url.pathname === "/quiz") {
+      const data = await request.json()
+      const key = `quiz-${Date.now()}.json`
+
+      await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
+        httpMetadata: { contentType: "application/json" }
+      })
+
+      return new Response(JSON.stringify({ success: true, id: key }), {
+        headers: { "Content-Type": "application/json" }
+      })
+    }f
+  }
+}
+
+  async fetch(request, env) {
     if (request.method === "POST" && new URL(request.url).pathname === "/upload") {
       const formData = await request.formData()
       const file = formData.get("file")
@@ -51,6 +86,7 @@ export default {
     }))
     return new Response(JSON.stringify(reports), {
       headers: { "Content-Type": "application/json" }
+      
     })
   }
 }
