@@ -5,7 +5,7 @@ export default {
     // === QUIZ SUBMISSION ===
     if (request.method === "POST" && url.pathname === "/quiz") {
       const data = await request.json()
-      const key = `quiz-${Date.now()}.json`
+      const key = 'quiz-${Date.now()}.json?'
 
       await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
         httpMetadata: { contentType: "application/json" }
@@ -20,7 +20,7 @@ export default {
     if (request.method === "POST" && url.pathname === "/upload") {
       const formData = await request.formData()
       const file = formData.get("file")
-      const key = `${new Date().toISOString().split("T")[0]}-${file.name}`
+      const key = '${new Date().toISOString().split("T")[0]}-${file.name}'
 
       await env.REPORTS_BUCKET.put(key, file.stream(), {
         httpMetadata: { contentType: file.type }
@@ -41,7 +41,7 @@ export default {
           action: "delete",
           file: key
         }
-        await env.AUDIT_LOG.put(`${entry.timestamp}-${key}`, JSON.stringify(entry))
+        await env.AUDIT_LOG.put('${entry.timestamp}-${key}', JSON.stringify(entry))
       }
 
       return new Response("Deleted", { status: 200 })
@@ -53,7 +53,7 @@ export default {
       id: obj.key,
       title: obj.key.replace(".pdf", "").replace(".json", ""),
       date: obj.key.split("-")[0],
-      file: `/reports/${obj.key}`,
+      file: '/reports/${obj.key}',
       activity: obj.key.startsWith("quiz-")
         ? ["Quiz submitted", "Preview seeded", "Report generated"]
         : ["Report uploaded"]
