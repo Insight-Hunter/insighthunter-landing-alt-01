@@ -1,0 +1,7 @@
+[[r2_buckets]]
+binding = "REPORTS_BUCKET"
+bucket_name = "insight-reports"
+
+[[kv_namespaces]]
+binding = "AUDIT_LOG"
+id = "your-kv-id"
