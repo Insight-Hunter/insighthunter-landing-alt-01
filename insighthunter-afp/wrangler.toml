@@ -1,5 +1,5 @@
 name = "insighthunter-worker"
-main = "insighthunter-afp/src/index.js"
+main = "workers/index.js"
 compatibility_date = "2025-12-14"
 
 [vars]
