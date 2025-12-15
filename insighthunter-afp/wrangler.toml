@@ -1,7 +1,14 @@
+name = "insighthunter-worker"
+main = "src/index.js"
+compatibility_date = "2025-12-14"
+
+[vars]
+APP_ENV = "production"
+
 [[r2_buckets]]
 binding = "REPORTS_BUCKET"
 bucket_name = "insight-reports"
 
 [[kv_namespaces]]
 binding = "AUDIT_LOG"
-id = "your-kv-id"
+id = "d8f19e64ec3b4f99b72fa51b54cf0575"
