@@ -1,0 +1,13 @@
+{
+  "id": "quiz-2025-12-14T02:56:00Z",
+  "role": "Treasurer",
+  "domain": "Liquidity",
+  "riskTolerance": "Moderate",
+  "answers": {
+    "q1": "Current liquidity ratio: 1.5",
+    "q2": "Forecast horizon: 6 months",
+    "q3": "Preferred reporting style: Summary"
+  },
+  "status": "submitted",
+  "timestamp": "2025-12-14T02:56:00Z"
+}
