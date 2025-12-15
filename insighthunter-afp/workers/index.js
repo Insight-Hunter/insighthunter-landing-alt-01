@@ -2,6 +2,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url)
 
+    // === QUIZ SUBMISSION ===
     if (request.method === "POST" && url.pathname === "/quiz") {
       const data = await request.json()
       const key = `quiz-${Date.now()}.json`
@@ -13,41 +14,10 @@ export default {
       return new Response(JSON.stringify({ success: true, id: key }), {
         headers: { "Content-Type": "application/json" }
       })
-    }if (request.method === "POST" && url.pathname === "/quiz") {
-  const data = await request.json()
-  const key = `quiz-${Date.now()}.json`
+    }
 
-  await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
-    httpMetadata: { contentType: "application/json" }
-  })
-
-  return new Response(JSON.stringify({ success: true, id: key }), {
-    headers: { "Content-Type": "application/json" }
-  })
-}
-
-
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url)
-
-    if (request.method === "POST" && url.pathname === "/quiz") {
-      const data = await request.json()
-      const key = `quiz-${Date.now()}.json`
-
-      await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
-        httpMetadata: { contentType: "application/json" }
-      })
-
-      return new Response(JSON.stringify({ success: true, id: key }), {
-        headers: { "Content-Type": "application/json" }
-      })
-    }f
-  }
-}
-
-  async fetch(request, env) {
-    if (request.method === "POST" && new URL(request.url).pathname === "/upload") {
+    // === REPORT UPLOAD ===
+    if (request.method === "POST" && url.pathname === "/upload") {
       const formData = await request.formData()
       const file = formData.get("file")
       const key = `${new Date().toISOString().split("T")[0]}-${file.name}`
@@ -59,59 +29,38 @@ export default {
       return new Response("Uploaded", { status: 200 })
     }
 
-    // Default: list reports
-    const objects = await env.REPORTS_BUCKET.list()
-    const reports = objects.objects.map(obj => ({
-      id: obj.key,
-      title: obj.key.replace(".pdf", ""),
-      date: obj.key.split("-")[0],
-      file: `/reports/${obj.key}`,
-      activity: ["Quiz submitted", "Preview seeded", "Report generated"]
-    }))
-    return new Response(JSON.stringify(reports), {
-      headers: { "Content-Type": "application/json" }
-    })
-  }
-}
-  if (request.method === "POST" && url.pathname === "/quiz") {
-  const data = await request.json()
-  const key = `quiz-${Date.now()}.json`
+    // === REPORT DELETE (ADMIN) ===
+    if (request.method === "DELETE" && url.pathname.startsWith("/delete/")) {
+      const key = url.pathname.split("/delete/")[1]
+      await env.REPORTS_BUCKET.delete(key)
 
-  await env.REPORTS_BUCKET.put(key, JSON.stringify(data), {
-    httpMetadata: { contentType: "application/json" }
-  })
+      // optional: log action into KV or R2
+      if (env.AUDIT_LOG) {
+        const entry = {
+          timestamp: new Date().toISOString(),
+          action: "delete",
+          file: key
+        }
+        await env.AUDIT_LOG.put(`${entry.timestamp}-${key}`, JSON.stringify(entry))
+      }
 
-  return new Response(JSON.stringify({ success: true, id: key }), {
-    headers: { "Content-Type": "application/json" }
-  })
-}
-
-export default {
-  async fetch(request, env) {
-    if (request.method === "POST" && new URL(request.url).pathname === "/upload") {
-      const formData = await request.formData()
-      const file = formData.get("file")
-      const key = `${new Date().toISOString().split("T")[0]}-${file.name}`
-
-      await env.REPORTS_BUCKET.put(key, file.stream(), {
-        httpMetadata: { contentType: file.type }
-      })
-
-      return new Response("Uploaded", { status: 200 })
+      return new Response("Deleted", { status: 200 })
     }
 
-    // Default: list reports
+    // === DEFAULT: LIST REPORTS ===
     const objects = await env.REPORTS_BUCKET.list()
     const reports = objects.objects.map(obj => ({
       id: obj.key,
-      title: obj.key.replace(".pdf", ""),
+      title: obj.key.replace(".pdf", "").replace(".json", ""),
       date: obj.key.split("-")[0],
       file: `/reports/${obj.key}`,
-      activity: ["Quiz submitted", "Preview seeded", "Report generated"]
+      activity: obj.key.startsWith("quiz-")
+        ? ["Quiz submitted", "Preview seeded", "Report generated"]
+        : ["Report uploaded"]
     }))
+
     return new Response(JSON.stringify(reports), {
       headers: { "Content-Type": "application/json" }
-      
     })
   }
 }
